@@ -37,102 +37,147 @@ const amy = {
   totaleCarrello: 0,
 };
 
+const matteo = {
+  name: "Matteo",
+  lastName: "Pascucci",
+  isAmbassador: true,
+  totaleCarrello: 0,
+};
+
 const prices = [34, 5, 2];
 const shippingCost = 50;
 let utenteCheEffettuaLAcquisto = amy; //cambia il valore qui per provare se il tuo algoritmo funziona!
 
+// Creo un array, al cui interno andrò a pushare gli utenti.
+
 let utenti = [];
 
-utenti.push(marco, paul, amy);
+utenti.push(marco, paul, amy, matteo);
+
+// Creo un ciclo per dividere gli utenti "ambassador" da quelli "non ambassador".
 
 for (let i = 0; i < utenti.length; i++) {
   if (utenti[i].isAmbassador === true) {
-    console.log(utenti[i].name + " " + utenti[i].lastName + "è un Ambassador");
+    console.log(utenti[i].name + " " + utenti[i].lastName + " è un Ambassador");
   } else if (utenti[i].isAmbassador === false) {
     console.log(
-      utenti[i].name + " " + utenti[i].lastName + "non è un Ambassador"
+      utenti[i].name + " " + utenti[i].lastName + " non è un Ambassador"
     );
   }
 }
 
-let utentiAmbassador = [];
+// Carrello degli utenti con i vari prodotti all'interno, differenti per ogni utente. In base ai costi dei prodotti e alla loro somma, l'algoritmo stampera differenti opzioni.
+// Se il totale sarà superiore a 100, non sarà aggiunto il costo di spedizione.
+// Se il totale sarà inferiore a 100, saranno aggiunti 50 di spedizione.
+// Per i clienti ambassador, dopo aver effettuato uno sconto del 30%, se il totale sarà inferiore a 100 sarà aggiunto il costo di speizione.
 
-for (let i = 0; i < utenti.length; i++) {
-  if (utenti[i].isAmbassador === true) {
-    utentiAmbassador.push(utenti[i])
-  }
-}
+utenti[0].totaleCarrello = prices[0] * 2 + prices[1] * 2 + prices[2];
+utenti[1].totaleCarrello = prices[0] * 5 + prices[2] * 3;
+utenti[2].totaleCarrello = prices[0] + prices[1] * 4;
+utenti[3].totaleCarrello = prices[0] * 3 + prices[2] * 2;
 
-marco.totaleCarrello = prices[0] * 2 + prices[1] * 2 + prices[2];
-
-if (marco.isAmbassador === true) {
+if (utenti[0].isAmbassador === true) {
   console.log(
     "Il conto del tuo carrello è di",
-    marco.totaleCarrello,
-    "ridotto a ",
-    marco.totaleCarrello - (marco.totaleCarrello / 100) * 30,
+    utenti[0].totaleCarrello,
+    "ridotto a",
+    utenti[0].totaleCarrello - (utenti[0].totaleCarrello / 100) * 30,
     "con il tuo sconto Ambassador. Il tuo conto totale con i costi di spedizione è di",
-    marco.totaleCarrello - (marco.totaleCarrello / 100) * 30 + shippingCost
+    utenti[0].totaleCarrello -
+      (utenti[0].totaleCarrello / 100) * 30 +
+      shippingCost
   );
-} else if (marco.totaleCarrello < 100) {
+} else if (utenti[0].totaleCarrello < 100) {
   console.log(
     "Il conto del tuo carrello è di",
-    marco.totaleCarrello,
+    utenti[0].totaleCarrello,
     "ridotto a ",
-    marco.totaleCarrello - (marco.totaleCarrello / 100) * 30,
+    utenti[0].totaleCarrello - (utenti[0].totaleCarrello / 100) * 30,
     "con il tuo sconto Ambassador."
   );
-} else if (marco.totaleCarrello > 100) {
+} else if (utenti[0].totaleCarrello > 100) {
   console.log(
     "Il conto del tuo carrello è di",
-    paul.totaleCarrello,
+    utenti[0].totaleCarrello,
     "Congratulazioni, la tua spedizione è gratuita."
   );
 }
 
-paul.totaleCarrello = prices[0] * 3 + prices[2] * 3;
-
-if (paul.isAmbassador === true) {
+if (utenti[1].isAmbassador === true) {
   console.log(
     "Il conto del tuo carrello è di",
-    paul.totaleCarrello,
+    utenti[1].totaleCarrello,
     "ridotto a ",
-    paul.totaleCarrello - (paul.totaleCarrello / 100) * 30,
+    utenti[1].totaleCarrello - (utenti[1].totaleCarrello / 100) * 30,
     "con il tuo sconto Ambassador."
   );
-} else if (paul.totaleCarrello < 100) {
-  console.log(
-    "Il conto del tuo carrello è di ",
-    paul.totaleCarrello + shippingCost,
-    "compresi i",
-    shippingCost,
-    "di spedizione."
-  );
-} else if (paul.totaleCarrello > 100) {
+} else if (utenti[1].totaleCarrello < 100) {
   console.log(
     "Il conto del tuo carrello è di",
-    +paul.totaleCarrello,
-    "Congratulazioni, la tua spedizione è gratuita."
-  );
-}
-
-amy.totaleCarrello = prices[0] + prices[1] * 4;
-
-if (amy.isAmbassador === true) {
-  console.log(
-    "Il conto del tuo carrello è di",
-    amy.totaleCarrello,
-    "ridotto a ",
-    amy.totaleCarrello - (amy.totaleCarrello / 100) * 30,
-    "con il tuo sconto Ambassador."
-  );
-} else if (amy.totaleCarrello < 100) {
-  console.log(
-    "Il conto del tuo carrello è di",
-    amy.totaleCarrello,
+    utenti[1].totaleCarrello,
     "Il tuo conto totale con i costi di spedizione è di",
-    amy.totaleCarrello + shippingCost
+    utenti[1].totaleCarrello + shippingCost
   );
-} else if (amy.totaleCarrello > 100) {
+} else if (utenti[1].totaleCarrello > 100) {
+  console.log(
+    "Il conto del tuo carrello è di",
+    utenti[1].totaleCarrello,
+    "Congratulazioni, la tua spedizione è gratuita."
+  );
+}
+
+if (utenti[2].isAmbassador === true) {
+  console.log(
+    "Il conto del tuo carrello è di",
+    utenti[2].totaleCarrello,
+    "ridotto a ",
+    utenti[2].totaleCarrello - (utenti[2].totaleCarrello / 100) * 30,
+    "con il tuo sconto Ambassador."
+  );
+} else if (utenti[2].totaleCarrello < 100) {
+  console.log(
+    "Il conto del tuo carrello è di",
+    utenti[2].totaleCarrello,
+    "Il tuo conto totale con i costi di spedizione è di",
+    utenti[2].totaleCarrello + shippingCost
+  );
+} else if (utenti[2].totaleCarrello > 100) {
   console.log("Congratulazioni, la tua spedizione è gratuita.");
 }
+
+if (utenti[3].isAmbassador === true) {
+  console.log(
+    "Il conto del tuo carrello è di",
+    utenti[3].totaleCarrello,
+    "ridotto a ",
+    utenti[3].totaleCarrello - (utenti[3].totaleCarrello / 100) * 30,
+    "con il tuo sconto Ambassador. Il tuo conto totale con i costi di spedizione è di",
+    utenti[3].totaleCarrello -
+      (utenti[3].totaleCarrello / 100) * 30 +
+      shippingCost
+  );
+} else if (utenti[3].totaleCarrello < 100) {
+  console.log(
+    "Il conto del tuo carrello è di",
+    utenti[3].totaleCarrello,
+    "ridotto a ",
+    utenti[3].totaleCarrello - (utenti[3].totaleCarrello / 100) * 30,
+    "con il tuo sconto Ambassador."
+  );
+} else if (utenti[3].totaleCarrello > 100) {
+  console.log(
+    "Il conto del tuo carrello è di",
+    utenti[3].totaleCarrello,
+    "Congratulazioni, la tua spedizione è gratuita."
+  );
+}
+
+// Creo un secondo array contenente solamente gli utenti ambassador.
+
+let utentiAmbassador = [];
+
+for (let i = 0; i < utenti.length; i++)
+  if (utenti[i].isAmbassador === true) {
+    utentiAmbassador.push(utenti[i]);
+  }
+console.log(utentiAmbassador);
